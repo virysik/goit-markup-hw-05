@@ -138,6 +138,7 @@ ul {
   display: inline-block;
 
   color: var(--main-secondary-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link.active {
@@ -178,6 +179,7 @@ ul {
   align-items: center;
 
   color: var(--main-primary-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-item:hover,
@@ -417,6 +419,9 @@ ul {
   color: #afb1b8;
   background-color: var(--secondary-accent-color);
   border-radius: 50%;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .team .social-link:hover,
@@ -449,7 +454,11 @@ ul {
 
   color: #afb1b8;
   border: 1px solid #afb1b8;
+  border-color: #afb1b8;
   border-radius: 4px;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .clients-link:hover,
@@ -471,16 +480,6 @@ ul {
   background-color: var(--secondary-background-color);
 }
 
-/* временние параметри, не знаю как по другому регулировать*/
-/*.footer-text,
-.footer-contact-info {
-  height: 21px;
-}
-
-.footer .logo {
-  height: 31px;
-}
-//////////////////////////////////////////////////*/
 .footer-text {
   font-weight: 400;
   font-size: 14px;
@@ -547,6 +546,8 @@ ul {
   color: var(--secondary-accent-color);
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer .social-link:hover,
@@ -558,15 +559,6 @@ ul {
 /* ------PORTFOLIO MAIN------ */
 .portfolio {
   background-color: var(--main-background-color);
-}
-.button-portfolio {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.63;
-
-  color: var(--main-secondary-color);
-
-  background-color: var(--third-background-color);
 }
 
 .buttons {
@@ -591,21 +583,23 @@ ul {
   font-size: 16px;
   line-height: 1.625;
 
+  color: var(--main-secondary-color);
+  background-color: var(--third-background-color);
   border-radius: 4px;
   border: none;
   cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button-portfolio:hover,
 .button-portfolio:focus {
-  border: none;
-
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
 
   color: var(--secondary-accent-color);
-
   background-color: var(--accent-color);
 }
 
@@ -628,18 +622,16 @@ ul {
   margin-bottom: 0;
 }
 
-/* АЛЬТЕРНАТИВА
+.portfolio-link {
+  display: block;
 
-.portfolio-item:not(:nth-child(3n)) {
-  margin-right: 30px;
+  color: inherit;
+  box-shadow: none;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.portfolio-item:not(:nth-last-child(-n + 3)) {
-  margin-bottom: 30px;
-} */
-
-.portfolio-item:hover,
-.portfolio-item:focus {
+.portfolio-link:hover,
+.portfolio-link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
@@ -670,7 +662,97 @@ ul {
   line-height: 1.875;
 }
 
-.portfolio-link {
-  color: inherit;
+.portfolio-thumb {
+  position: relative;
+
+  overflow: hidden;
 }
-/* ------ END PORTFOLIO MAIN------ */ ;
+
+.image-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  padding-top: 63px;
+  padding-right: 24px;
+  padding-bottom: 63px;
+  padding-left: 24px;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.556;
+
+  color: var(--secondary-accent-color);
+  background-color: rgba(33, 150, 243, 0.9);
+  transform: translateY(100%);
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-link:hover .image-text,
+.portfolio-link:focus .image-text {
+  transform: translateY(0%);
+}
+
+/* ------ END PORTFOLIO MAIN------ */
+
+/* ------ BACKDROP------ */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  opacity: 1;
+  pointer-events: initial;
+
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    pointer-events 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 528px;
+  min-height: 581px;
+
+  background-color: var(--secondary-accent-color);
+}
+
+.backdrop .btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+
+  background-color: var(--secondary-accent-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close {
+  width: 18px;
+  height: 18px;
+
+  fill: rgb(0, 0, 0);
+}
+/* ------ END BACKDROP------ */
